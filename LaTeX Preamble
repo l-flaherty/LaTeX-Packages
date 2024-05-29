@@ -1,0 +1,175 @@
+\documentclass[12pt, letterpaper]{article}
+\usepackage[left=2.5cm,right=2.5cm, top=2.5cm, bottom=2.5cm]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhead[R]{Flaherty, \thepage}
+\renewcommand{\headrulewidth}{2pt}
+\setlength{\headheight}{15pt}
+
+%packages%
+\usepackage{lipsum}
+\usepackage{amsmath}
+\usepackage[makeroom]{cancel}
+\usepackage{cancel}
+\usepackage{array,polynom}
+\newcolumntype{C}{>{{}}c<{{}}} 
+\newcolumntype{R}{>{\displaystyle}r}  
+\usepackage{xcolor}
+\newcommand\Ccancel[2][black]{\renewcommand\CancelColor{\color{#1}}\cancel{#2}}
+\usepackage{amssymb}
+\usepackage{bbm}
+\usepackage{mathrsfs}
+\usepackage[toc]{glossaries}
+\usepackage{amsthm}
+\usepackage{indentfirst}
+\usepackage[utf8]{inputenc}
+\usepackage[thinc]{esdiff}
+\usepackage{graphicx}
+\graphicspath{{./images/}}
+\usepackage{subfig}
+\usepackage{chngcntr}
+\usepackage{placeins}
+\usepackage{caption}
+\usepackage{float}
+\usepackage{comment}
+\usepackage{sectsty}
+\sectionfont{\fontsize{15}{15}\selectfont}
+\usepackage{subcaption}
+\setlength\abovedisplayskip{0pt}
+\usepackage[hidelinks]{hyperref}
+\usepackage[nottoc,numbib]{tocbibind}
+\renewcommand{\qedsymbol}{\rule{0.7em}{0.7em}}
+\newcommand{\Mod}[1]{\ (\mathrm{mod}\ #1)}
+\counterwithin{figure}{section}
+\usepackage{centernot}
+\usepackage{enumitem}  
+
+
+
+%Numbering and Math Types%             
+\theoremstyle{definition}
+\newtheorem{exmp}{Example}
+\newtheorem{nonexmp}{Non-Example}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{definition}{Definition}[section]
+\newtheorem{prop}{Proposition}[section]
+\newtheorem{lemma}{Lemma}[theorem]
+\numberwithin{equation}{section}
+\newenvironment{ex}{
+	\par\smallskip 
+	\noindent\textit{Example:\hspace{-0.25em}}
+	\leftskip=0.5em
+}{
+	\par\smallskip
+	\leftskip=0em
+}
+
+\newenvironment{nonex}{
+	\par\smallskip
+	\noindent\textit{Non-example:\hspace{-0.25em}}
+	\leftskip=0.5em 
+}{
+	\par\smallskip 
+	\leftskip=0em 
+}
+\newcommand{\problem}[1]{\noindent \textbf{Problem \thesection.#1)}}
+
+
+
+%References%
+\newcommand{\mydef}[1]{(Definition \ref{#1}, Page \pageref{#1})}
+\newcommand{\mytheorem}[1]{(Theorem \ref{#1}, Page \pageref{#1})}
+\newcommand{\mycor}[1]{(Corollary \ref{#1}, Page \pageref{#1})}
+\newcommand{\mylemma}[1]{(Lemma \ref{#1}, Page \pageref{#1})}
+\newcommand{\myprob}[1]{(Problem \ref{#1}, Page \pageref{#1})}
+\newcommand{\clickableword}[2]{\hyperref[#1]{#2}}
+
+
+
+%Commutative Diagrams%
+\usepackage{tikz}                     
+\usetikzlibrary{arrows}               
+\usetikzlibrary{shapes.geometric}  
+\usetikzlibrary{calc}
+\pgfkeys{/tikz/.cd,
+	num vertex/.initial=4,
+	num vertex/.get=\vertices,
+	num vertex/.store in=\vertices,
+	circle radius/.initial=3,
+	circle radius/.get=\circleradius,
+	circle radius/.store in=\circleradius,
+	shift angle/.initial=0,
+	shift angle/.get=\shiftangle,
+	shift angle/.store in=\shiftangle, 
+	at pos/.initial={(0,0)},
+	at pos/.get=\position,
+	at pos/.store in=\position,
+	vertex radius/.initial=1.5pt,
+	vertex radius/.get=\vertexradius,
+	vertex radius/.store in=\vertexradius,
+}
+\makeatletter
+\def\drawvertices{\tikz@path@overlay{node}}
+\makeatother   
+\pgfkeys{/tikz/circumference with labels/.code={
+		\pgfmathsetmacro\halfcircleradius{\circleradius/2}
+		\draw \position circle (\halfcircleradius cm) node[regular polygon, regular polygon sides=\vertices, minimum size=\circleradius cm, draw=none, name={vertex set}] {};
+		\foreach \textlabel/\circlecolor [count=\x] in {#1}{
+			\node[draw,circle, inner sep=\vertexradius,black, fill=\circlecolor] at (vertex set.corner \x) {};
+			\pgfmathparse{\shiftangle-360*(\x-1)/ \vertices}
+			\node at ($(vertex set)+(\pgfmathresult:\halfcircleradius)$)[label={[font=\small]\pgfmathresult:$\textlabel$}]{};
+		}
+	}
+}
+
+
+
+%Custom command for matrices%
+\newcommand{\mymatrix}[1]{
+	\renewcommand{\arraystretch}{0.5} 
+	\setlength\arraycolsep{3pt}       
+	\scalebox{0.90}{                  
+		$\begin{bmatrix}
+			#1
+		\end{bmatrix}$
+	}                   
+	\renewcommand{\arraystretch}{1.0} 
+	\setlength\arraycolsep{6pt}       
+}
+
+
+
+%underscript for operations%
+\newcommand{\+}[1]{+_{\scalebox{.375}{#1}}}
+\newcommand{\mult}[1]{\cdot_{\scalebox{.375}{#1}}}
+
+
+
+%limits for summands and such%
+\newcommand{\mysum}[2]{\sum\limits_{#1}^{#2}}
+\newcommand{\mylim}[2]{\lim\limits_{#1}^{#2}}
+\newcommand{\myint}[2]{\int\limits_{#1}^{#2}}
+\newcommand{\myprod}[2]{\prod\limits_{#1}^{#2}}
+
+
+
+%blackboard for letters%
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\V}{\mathbb{V}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\K}{\mathbb{K}}
+\newcommand{\1}{\mathbbm{1}}
+\newcommand{\Prob}{\mathbbm{P}}
+
+\title{A title}
+\author{Name}
+\date{\parbox{\linewidth}{\centering%
+		Professor\endgraf\bigskip
+		Course\endgraf\bigskip
+		Date\endgraf}}
