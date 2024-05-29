@@ -2,7 +2,7 @@
 \usepackage[left=2.5cm,right=2.5cm, top=2.5cm, bottom=2.5cm]{geometry}
 \usepackage{fancyhdr}
 \pagestyle{fancy}
-\fancyhead[R]{Flaherty, \thepage}
+\fancyhead[R]{name, \thepage}
 \renewcommand{\headrulewidth}{2pt}
 \setlength{\headheight}{15pt}
 
