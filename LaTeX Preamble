@@ -153,6 +153,15 @@
 \newcommand{\myprod}[2]{\prod\limits_{#1}^{#2}}
 
 
+%shortcuts for stats and derivatives%
+\newcommand{\drv}[2]{\frac{d #1}{d #2}}
+\newcommand{\pdrv}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\samp}[1]{\underset{\sim}{\hat{#1}}}
+\newcommand{\estimator}[1]{\underset{\sim}{#1}}
+\newcommand{\mom}[1]{\underset{\sim}{#1_{\scalebox{0.35}{MOM}}}}
+\newcommand{\mle}[1]{\underset{\sim}{#1_{\scalebox{0.35}{MLE}}}}
+
+
 
 %blackboard for letters%
 \newcommand{\E}{\mathbb{E}}
